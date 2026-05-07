@@ -1,17 +1,17 @@
-import { Text } from 'react-native';
 import {
   SafeAreaProvider,
-  SafeAreaView,
 } from 'react-native-safe-area-context';
+import {NavigationContainer} from '@react-navigation/native'
+import Navigation from './source/navigation/Navigation';
 
 function App() {
 
   return (
-    <SafeAreaProvider>
-      <SafeAreaView>
-        <Text>APP</Text>
-      </SafeAreaView>
-    </SafeAreaProvider>
+    <NavigationContainer>
+      <SafeAreaProvider>
+        <Navigation />
+      </SafeAreaProvider>
+    </NavigationContainer>
   );
 }
 
