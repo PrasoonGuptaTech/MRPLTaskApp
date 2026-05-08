@@ -1,6 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
+  Dimensions,
   Image,
+  Modal,
   Pressable,
   ScrollView,
   StyleSheet,
@@ -10,10 +12,13 @@ import {
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 function ViewListTask() {
-  const onFloatingButtonPressHandler = () => {};
+  const [isCreateTaskVisible, setIsCreateTaskVisible] =
+    useState<boolean>(false);
+  const onFloatingButtonPressHandler = () => setIsCreateTaskVisible(true);
+  const onCreateTaskCloseHandler = () => setIsCreateTaskVisible(false);
   return (
-    <SafeAreaView style={styles.container}>
-      <ScrollView contentContainerStyle={styles.scrollContainerStyle}>
+    <>
+      <SafeAreaView style={styles.container}>
         <Pressable
           style={styles.overlayLayout}
           onPress={onFloatingButtonPressHandler}
@@ -27,20 +32,35 @@ function ViewListTask() {
           />
           <Text style={styles.activeTaskText}>No Active Tasks</Text>
         </View>
-      </ScrollView>
-    </SafeAreaView>
+      </SafeAreaView>
+      <Modal
+        visible={isCreateTaskVisible}
+        transparent={true}
+        animationType="fade"
+        statusBarTranslucent={true}
+      >
+        <View style={styles.modalContainer}>
+          <Pressable
+            style={styles.overlayInvisibleLayout}
+            onPress={onCreateTaskCloseHandler}
+          />
+          <View style={styles.modalLayoutView}>
+            <ScrollView nestedScrollEnabled={true}>
+              <Text>Modal Content View</Text>
+            </ScrollView>
+          </View>
+        </View>
+      </Modal>
+    </>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#F8FAFC',
-  },
-  scrollContainerStyle: {
-    flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
+    backgroundColor: '#F8FAFC',
   },
   overlayLayout: {
     justifyContent: 'center',
@@ -53,7 +73,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: '#06B6D4',
     borderRadius: 25,
-    zIndex: 999,
+    zIndex: 1,
     backgroundColor: '#06B6D4',
   },
   plusText: {
@@ -80,6 +100,28 @@ const styles = StyleSheet.create({
   warningIconStyle: {
     width: 40,
     height: 40,
+  },
+  modalContainer: {
+    flex: 1,
+    justifyContent: 'flex-end',
+    alignItems: 'center',
+  },
+  overlayInvisibleLayout: {
+    position: 'absolute',
+    top: 0,
+    bottom: 0,
+    right: 0,
+    left: 0,
+  },
+  modalLayoutView: {
+    width: Dimensions.get('window').width,
+    height: '60%',
+    borderWidth: 1,
+    borderRadius: 8,
+    borderColor: 'rgba(248, 250, 252, 0.3)',
+    backgroundColor: 'rgba(100, 116, 139, 0.3)',
+    zIndex: 2,
+    padding: 8,
   },
 });
 
