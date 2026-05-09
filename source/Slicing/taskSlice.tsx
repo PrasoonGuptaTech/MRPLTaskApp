@@ -1,26 +1,29 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { RootState } from '../redux/store';
 
+interface Task {
+  id: number;
+  addTaskTitle: string;
+  addTaskDescription: string;
+}
 export interface TaskState {
-  taskTitle: string;
-  taskDescription: string;
+  taskArray: Task[]
 }
 
 const initialState: TaskState = {
-  taskTitle: '',
-  taskDescription: '',
+  taskArray: [],
 };
 
 export const TaskSlice = createSlice({
   name: 'Task',
   initialState,
   reducers: {
-    createTask: (state, action: PayloadAction<string>) => {
-      state.taskTitle = action.payload;
+    createTask: (state, action: PayloadAction<Task>) => {
+      state.taskArray.push(action?.payload);
     },
   },
 });
 
 export const { createTask } = TaskSlice.actions;
-export const titleRedux = (state: RootState) => state.task.taskTitle;
+export const taskRedux = (state: RootState) => state?.task?.taskArray;
 export const taskReducer = TaskSlice.reducer;

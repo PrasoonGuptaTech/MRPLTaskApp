@@ -9,6 +9,8 @@ import {
   TextInput,
   View,
 } from 'react-native';
+import { createTask } from '../Slicing/taskSlice';
+import { useAppDispatch } from '../hooks/redux/reduxHooks';
 
 function ModalAddTaskView(props: any) {
   const {
@@ -18,10 +20,21 @@ function ModalAddTaskView(props: any) {
     setDescriptionInput,
     onCreateTaskCloseHandler,
   } = props;
+  const dispatch = useAppDispatch();
   const onCancelCTAPressHandler = () => {
     setTitleInput('');
     setDescriptionInput('');
     onCreateTaskCloseHandler();
+  };
+  const onAddTaskCTAHandler = () => {
+    if (titleInput !== '' && descriptionInput !== '') {
+      const addTaskArray = {
+        id: 1,
+        addTaskTitle: titleInput,
+        addTaskDescription: descriptionInput,
+      };
+      dispatch(createTask(addTaskArray));
+    }
   };
   return (
     <View style={styles.modalLayoutView}>
@@ -68,7 +81,7 @@ function ModalAddTaskView(props: any) {
           />
         </View>
       </ScrollView>
-      <Pressable style={styles.addTaskCTA}>
+      <Pressable style={styles.addTaskCTA} onPress={onAddTaskCTAHandler}>
         <Text style={styles.addTaskCTAText}>Add Task</Text>
       </Pressable>
       <Pressable
