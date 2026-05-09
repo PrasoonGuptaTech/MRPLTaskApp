@@ -1,21 +1,16 @@
-import React from 'react';
-import {
-  Dimensions,
-  Modal,
-  Pressable,
-  ScrollView,
-  StyleSheet,
-  Text,
-  View,
-} from 'react-native';
+import React, { useState } from 'react';
+import { Modal, Pressable, StyleSheet, View } from 'react-native';
+import ModalAddTaskView from './ModalAddTaskView';
 
 function CreateTaskModal(props: any) {
   const { isCreateTaskVisible, onCreateTaskCloseHandler } = props;
+  const [titleInput, setTitleInput] = useState<string>('');
+  const [descriptionInput, setDescriptionInput] = useState<string>('');
   return (
     <Modal
       visible={isCreateTaskVisible}
       transparent={true}
-      animationType="fade"
+      animationType="slide"
       statusBarTranslucent={true}
     >
       <View style={styles.modalContainer}>
@@ -23,11 +18,12 @@ function CreateTaskModal(props: any) {
           style={styles.overlayInvisibleLayout}
           onPress={onCreateTaskCloseHandler}
         />
-        <View style={styles.modalLayoutView}>
-          <ScrollView nestedScrollEnabled={true}>
-            <Text>Modal Content View</Text>
-          </ScrollView>
-        </View>
+        <ModalAddTaskView
+          titleInput={titleInput}
+          setTitleInput={setTitleInput}
+          descriptionInput={descriptionInput}
+          setDescriptionInput={setDescriptionInput}
+        />
       </View>
     </Modal>
   );
@@ -45,16 +41,6 @@ const styles = StyleSheet.create({
     bottom: 0,
     right: 0,
     left: 0,
-  },
-  modalLayoutView: {
-    width: Dimensions.get('window').width,
-    height: '60%',
-    borderWidth: 1,
-    borderRadius: 8,
-    borderColor: 'rgba(248, 250, 252, 0.3)',
-    backgroundColor: 'rgba(100, 116, 139, 0.3)',
-    zIndex: 2,
-    padding: 8,
   },
 });
 
