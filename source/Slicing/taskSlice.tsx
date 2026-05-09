@@ -21,6 +21,9 @@ export const TaskSlice = createSlice({
     createTask: (state, action: PayloadAction<Task>) => {
       state.taskArray.push(action?.payload);
     },
+    default: () => {
+      return initialState;
+    }
   },
 });
 
