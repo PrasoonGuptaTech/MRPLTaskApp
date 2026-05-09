@@ -11,53 +11,70 @@ import {
 } from 'react-native';
 
 function ModalAddTaskView(props: any) {
-  const { titleInput, setTitleInput, descriptionInput, setDescriptionInput } =
-    props;
+  const {
+    titleInput,
+    setTitleInput,
+    descriptionInput,
+    setDescriptionInput,
+    onCreateTaskCloseHandler,
+  } = props;
+  const onCancelCTAPressHandler = () => {
+    setTitleInput('');
+    setDescriptionInput('');
+    onCreateTaskCloseHandler();
+  };
   return (
     <View style={styles.modalLayoutView}>
       <Text style={styles.headingTaskMainTitle}>Add Task</Text>
       <View style={styles.dividerLine} />
       <ScrollView nestedScrollEnabled={true}>
-        <Text style={styles.headingTitle}>Title</Text>
-        <TextInput
-          value={titleInput}
-          onChangeText={setTitleInput}
-          editable={true}
-          inputMode="text"
-          keyboardAppearance="light"
-          numberOfLines={1}
-          placeholder="Enter Title"
-          placeholderTextColor="#64748B"
-          textAlign="left"
-          textAlignVertical="bottom"
-          style={styles.titleInput}
-          cursorColor="#0F172A"
-          selectionColor="#0F172A"
-          autoCorrect={false}
-        />
-        <Text style={styles.headingTitle}>Description</Text>
-        <TextInput
-          value={descriptionInput}
-          onChangeText={setDescriptionInput}
-          editable={true}
-          inputMode="text"
-          keyboardAppearance="light"
-          multiline={true}
-          numberOfLines={5}
-          placeholder="Enter Description"
-          placeholderTextColor="#64748B"
-          textAlign="left"
-          textAlignVertical="bottom"
-          style={[styles.titleInput, styles.descriptionInput]}
-          cursorColor="#0F172A"
-          selectionColor="#0F172A"
-          autoCorrect={false}
-        />
+        <View>
+          <Text style={styles.headingTitle}>Title</Text>
+          <TextInput
+            value={titleInput}
+            onChangeText={setTitleInput}
+            editable={true}
+            inputMode="text"
+            keyboardAppearance="light"
+            numberOfLines={1}
+            placeholder="Enter Title"
+            placeholderTextColor="#64748B"
+            textAlign="left"
+            textAlignVertical="bottom"
+            style={styles.titleInput}
+            cursorColor="#0F172A"
+            selectionColor="#0F172A"
+            autoCorrect={false}
+          />
+        </View>
+        <View>
+          <Text style={styles.headingTitle}>Description</Text>
+          <TextInput
+            value={descriptionInput}
+            onChangeText={setDescriptionInput}
+            editable={true}
+            inputMode="text"
+            keyboardAppearance="light"
+            multiline={true}
+            numberOfLines={5}
+            placeholder="Enter Description"
+            placeholderTextColor="#64748B"
+            textAlign="left"
+            textAlignVertical="bottom"
+            style={[styles.titleInput, styles.descriptionInput]}
+            cursorColor="#0F172A"
+            selectionColor="#0F172A"
+            autoCorrect={false}
+          />
+        </View>
       </ScrollView>
       <Pressable style={styles.addTaskCTA}>
         <Text style={styles.addTaskCTAText}>Add Task</Text>
       </Pressable>
-      <Pressable style={[styles.addTaskCTA, styles.cancelCTA]}>
+      <Pressable
+        style={[styles.addTaskCTA, styles.cancelCTA]}
+        onPress={onCancelCTAPressHandler}
+      >
         <Text style={styles.addTaskCTAText}>Cancel</Text>
       </Pressable>
     </View>
@@ -144,8 +161,8 @@ const styles = StyleSheet.create({
   cancelCTA: {
     marginBottom: 36,
     backgroundColor: '#ee5050',
-    borderColor: '#ee5050'
-  }
+    borderColor: '#ee5050',
+  },
 });
 
 export default ModalAddTaskView;

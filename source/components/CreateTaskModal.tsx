@@ -23,6 +23,7 @@ function CreateTaskModal(props: any) {
           setTitleInput={setTitleInput}
           descriptionInput={descriptionInput}
           setDescriptionInput={setDescriptionInput}
+          onCreateTaskCloseHandler={onCreateTaskCloseHandler}
         />
       </View>
     </Modal>
