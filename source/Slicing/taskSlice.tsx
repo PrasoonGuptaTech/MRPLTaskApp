@@ -2,7 +2,7 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { RootState } from '../redux/store';
 
 interface Task {
-  id: number;
+  id: string;
   addTaskTitle: string;
   addTaskDescription: string;
 }

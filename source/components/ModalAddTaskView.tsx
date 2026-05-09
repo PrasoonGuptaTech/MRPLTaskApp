@@ -29,7 +29,7 @@ function ModalAddTaskView(props: any) {
   const onAddTaskCTAHandler = () => {
     if (titleInput !== '' && descriptionInput !== '') {
       const addTaskArray = {
-        id: 1,
+        id: Math.random().toString(36).slice(2, 9),
         addTaskTitle: titleInput,
         addTaskDescription: descriptionInput,
       };
