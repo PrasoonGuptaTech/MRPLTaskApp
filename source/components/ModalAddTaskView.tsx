@@ -33,6 +33,7 @@ function ModalAddTaskView(props: any) {
           style={styles.titleInput}
           cursorColor="#0F172A"
           selectionColor="#0F172A"
+          autoCorrect={false}
         />
         <Text style={styles.headingTitle}>Description</Text>
         <TextInput
@@ -50,10 +51,14 @@ function ModalAddTaskView(props: any) {
           style={[styles.titleInput, styles.descriptionInput]}
           cursorColor="#0F172A"
           selectionColor="#0F172A"
+          autoCorrect={false}
         />
       </ScrollView>
       <Pressable style={styles.addTaskCTA}>
         <Text style={styles.addTaskCTAText}>Add Task</Text>
+      </Pressable>
+      <Pressable style={[styles.addTaskCTA, styles.cancelCTA]}>
+        <Text style={styles.addTaskCTAText}>Cancel</Text>
       </Pressable>
     </View>
   );
@@ -71,7 +76,7 @@ const styles = StyleSheet.create({
     padding: 8,
   },
   headingTaskMainTitle: {
-    fontSize: 22,
+    fontSize: 20,
     fontWeight: '500',
     fontStyle: 'normal',
     textAlign: 'left',
@@ -85,7 +90,7 @@ const styles = StyleSheet.create({
     opacity: 0.5,
   },
   headingTitle: {
-    fontSize: 20,
+    fontSize: 18,
     fontWeight: '500',
     fontStyle: 'normal',
     textAlign: 'left',
@@ -125,7 +130,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     alignSelf: 'center',
-    marginBottom: 36,
+    marginBottom: 16,
     backgroundColor: '#06B6D4',
     borderColor: '#06B6D4',
   },
@@ -136,6 +141,11 @@ const styles = StyleSheet.create({
     textAlign: 'left',
     color: '#FFFFFF',
   },
+  cancelCTA: {
+    marginBottom: 36,
+    backgroundColor: '#ee5050',
+    borderColor: '#ee5050'
+  }
 });
 
 export default ModalAddTaskView;
