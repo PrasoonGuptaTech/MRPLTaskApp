@@ -5,6 +5,7 @@ import CreateTaskFloatingButton from '../components/CreateTaskFloatingButton';
 import NoActiveTask from '../components/NoActiveTask';
 import CreateTaskModal from '../components/CreateTaskModal';
 import { useAppSelector } from '../hooks/redux/reduxHooks';
+import ActiveTask from '../components/ActiveTask';
 
 function ViewListTask() {
   const [isCreateTaskVisible, setIsCreateTaskVisible] =
@@ -20,6 +21,9 @@ function ViewListTask() {
         />
         {Array?.isArray(taskDetails) && taskDetails?.length === 0 && (
           <NoActiveTask />
+        )}
+        {Array?.isArray(taskDetails) && taskDetails?.length > 0 && (
+          <ActiveTask taskDetails={taskDetails} />
         )}
       </SafeAreaView>
       <CreateTaskModal
