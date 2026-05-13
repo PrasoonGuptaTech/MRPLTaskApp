@@ -9,12 +9,18 @@ import {
   View,
 } from 'react-native';
 import { isExpandedCheck } from '../Utility/Operations';
+import { useAppDispatch } from '../hooks/redux/reduxHooks';
+import { deleteTask } from '../Slicing/taskSlice';
 
 function ActiveTask(props: any) {
   const { taskDetails } = props;
+  const dispatch = useAppDispatch();
   const [taskExpanded, setTaskExpanded] = useState<{ [key: string]: boolean }>(
     {},
   );
+  const onDeleteCTAHandler = (id: any) => {
+    dispatch(deleteTask(id));
+  };
   const onTaskExpandedHandler = (id: string) => {
     setTaskExpanded(prev => ({
       ...prev,
@@ -61,7 +67,10 @@ function ActiveTask(props: any) {
               <Pressable style={styles.editButtonCTAStyle}>
                 <Text style={styles.editCTATextStyle}>Edit</Text>
               </Pressable>
-              <Pressable style={styles.editButtonCTAStyle}>
+              <Pressable
+                style={styles.editButtonCTAStyle}
+                onPress={() => onDeleteCTAHandler(item?.id)}
+              >
                 <Text style={styles.editCTATextStyle}>Delete</Text>
               </Pressable>
             </View>
