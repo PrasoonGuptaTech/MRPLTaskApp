@@ -57,6 +57,14 @@ function ActiveTask(props: any) {
             <Text style={styles.addTaskDescriptionTextStyle}>
               {item?.addTaskDescription}
             </Text>
+            <View style={styles.buttonViewLayout}>
+              <Pressable style={styles.editButtonCTAStyle}>
+                <Text style={styles.editCTATextStyle}>Edit</Text>
+              </Pressable>
+              <Pressable style={styles.editButtonCTAStyle}>
+                <Text style={styles.editCTATextStyle}>Delete</Text>
+              </Pressable>
+            </View>
           </View>
         )}
       </>
@@ -129,6 +137,7 @@ const styles = StyleSheet.create({
     fontStyle: 'normal',
     textAlign: 'left',
     color: '#002D62',
+    marginLeft: 2,
   },
   arrowIconViewStyle: {
     position: 'absolute',
@@ -152,6 +161,29 @@ const styles = StyleSheet.create({
     borderColor: '#FFFFFF',
     opacity: 1,
     marginVertical: 8,
+  },
+  buttonViewLayout: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginHorizontal: 5,
+    marginVertical: 8,
+  },
+  editButtonCTAStyle: {
+    width: Dimensions.get('window').width / 3,
+    height: 32,
+    borderWidth: 1,
+    borderColor: '#0056b3',
+    borderRadius: 8,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#0056b3',
+  },
+  editCTATextStyle: {
+    fontSize: 16,
+    fontWeight: '500',
+    fontStyle: 'normal',
+    textAlign: 'left',
+    color: '#FFFFFF',
   },
 });
 
