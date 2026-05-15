@@ -1,10 +1,10 @@
-import {configureStore} from '@reduxjs/toolkit';
+import { configureStore } from '@reduxjs/toolkit';
 import { taskReducer } from '../Slicing/taskSlice';
 
 export const store = configureStore({
-    reducer: {
-        task: taskReducer,
-    }
+  reducer: {
+    task: taskReducer,
+  },
 });
 
 export type RootState = ReturnType<typeof store.getState>;

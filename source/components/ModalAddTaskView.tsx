@@ -98,7 +98,9 @@ function ModalAddTaskView(props: any) {
         </View>
       </ScrollView>
       <Pressable style={styles.addTaskCTA} onPress={onAddTaskCTAHandler}>
-        <Text style={styles.addTaskCTAText}>{`${isEdtTaskModalOpen ? 'Update' : 'Add'} Task`}</Text>
+        <Text style={styles.addTaskCTAText}>{`${
+          isEdtTaskModalOpen ? 'Update' : 'Add'
+        } Task`}</Text>
       </Pressable>
       <Pressable
         style={[styles.addTaskCTA, styles.cancelCTA]}
