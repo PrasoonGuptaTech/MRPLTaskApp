@@ -1,5 +1,4 @@
 import { configureStore } from '@reduxjs/toolkit';
-import storage from 'redux-persist/lib/storage';
 import {
   FLUSH,
   PAUSE,
@@ -11,10 +10,13 @@ import {
   REHYDRATE,
 } from 'redux-persist';
 import rootReducer from './rootReducer';
+import { reduxStorage } from '../MMKV/reduxStorage';
 
 const persistConfig = {
   key: 'root',
-  storage: storage,
+  version: 1,
+  storage: reduxStorage,
+  whitelist: ['task'],
 };
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
