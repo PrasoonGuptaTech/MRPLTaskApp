@@ -3,7 +3,7 @@ import { Modal, Pressable, StyleSheet, View } from 'react-native';
 import ModalAddTaskView from './ModalAddTaskView';
 
 function CreateTaskModal(props: any) {
-  const { isCreateTaskVisible, onCreateTaskCloseHandler } = props;
+  const { isCreateTaskVisible, onCreateTaskCloseHandler, editTask } = props;
   const [titleInput, setTitleInput] = useState<string>('');
   const [descriptionInput, setDescriptionInput] = useState<string>('');
   return (
@@ -19,11 +19,12 @@ function CreateTaskModal(props: any) {
           onPress={onCreateTaskCloseHandler}
         />
         <ModalAddTaskView
-          titleInput={titleInput}
+          titleInput={titleInput || editTask?.addTaskTitle}
           setTitleInput={setTitleInput}
-          descriptionInput={descriptionInput}
+          descriptionInput={descriptionInput || editTask?.addTaskDescription}
           setDescriptionInput={setDescriptionInput}
           onCreateTaskCloseHandler={onCreateTaskCloseHandler}
+          editTask={editTask}
         />
       </View>
     </Modal>

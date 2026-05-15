@@ -9,8 +9,8 @@ import {
   TextInput,
   View,
 } from 'react-native';
-import { createTask } from '../Slicing/taskSlice';
-import { useAppDispatch } from '../hooks/redux/reduxHooks';
+import { createTask, updateTask } from '../Slicing/taskSlice';
+import { useAppDispatch, useAppSelector } from '../hooks/redux/reduxHooks';
 
 function ModalAddTaskView(props: any) {
   const {
@@ -19,8 +19,12 @@ function ModalAddTaskView(props: any) {
     descriptionInput,
     setDescriptionInput,
     onCreateTaskCloseHandler,
+    editTask,
   } = props;
   const dispatch = useAppDispatch();
+  const isEdtTaskModalOpen = useAppSelector(
+    state => state?.task?.isTaskEditable,
+  );
   const onCancelCTAPressHandler = () => {
     setTitleInput('');
     setDescriptionInput('');
@@ -28,12 +32,21 @@ function ModalAddTaskView(props: any) {
   };
   const onAddTaskCTAHandler = () => {
     if (titleInput !== '' && descriptionInput !== '') {
-      const addTaskArray = {
-        id: Math.random()?.toString(36)?.slice(2, 9),
-        addTaskTitle: titleInput,
-        addTaskDescription: descriptionInput,
-      };
-      dispatch(createTask(addTaskArray));
+      if (isEdtTaskModalOpen) {
+        const addTaskArray = {
+          id: editTask?.id,
+          addTaskTitle: titleInput,
+          addTaskDescription: descriptionInput,
+        };
+        dispatch(updateTask(addTaskArray));
+      } else {
+        const addTaskArray = {
+          id: Math.random()?.toString(36)?.slice(2, 9),
+          addTaskTitle: titleInput,
+          addTaskDescription: descriptionInput,
+        };
+        dispatch(createTask(addTaskArray));
+      }
       onCreateTaskCloseHandler();
       setTitleInput('');
       setDescriptionInput('');
@@ -85,7 +98,7 @@ function ModalAddTaskView(props: any) {
         </View>
       </ScrollView>
       <Pressable style={styles.addTaskCTA} onPress={onAddTaskCTAHandler}>
-        <Text style={styles.addTaskCTAText}>Add Task</Text>
+        <Text style={styles.addTaskCTAText}>{`${isEdtTaskModalOpen ? 'Update' : 'Add'} Task`}</Text>
       </Pressable>
       <Pressable
         style={[styles.addTaskCTA, styles.cancelCTA]}
