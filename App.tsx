@@ -4,6 +4,7 @@ import Navigation from './source/navigation/Navigation';
 import { Provider } from 'react-redux';
 import { persistor, store } from './source/redux/store';
 import { PersistGate } from 'redux-persist/integration/react';
+import {Text} from 'react-native';
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
         <NavigationContainer>
           <SafeAreaProvider>
             <Navigation />
+            <Text>Testing....</Text>
           </SafeAreaProvider>
         </NavigationContainer>
       </PersistGate>
